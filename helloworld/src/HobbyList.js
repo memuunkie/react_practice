@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // does not need a .css because will be a component used inside Pet.js
+
 class HobbyList extends Component {
 	render() {
 		// refactor to make hobbies a seperate component
