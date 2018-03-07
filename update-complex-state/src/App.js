@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
 import './App.css';
 
+// creating a "template" for instructors
+class InstructorItem extends Component {
+  static propTypes = {
+    name: PropTypes.string,
+    hobbies: PropTypes.arrayOf(PropTypes.string)
+  }
+
+  render() {
+    return (
+      <li>
+        <h3>{ this.props.name }</h3>
+        <h4>
+          Hobbies: { this.props.hobbies.join(', ') }
+        </h4>
+      </li>
+    );
+  }
+
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
