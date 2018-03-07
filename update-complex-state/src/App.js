@@ -33,17 +33,36 @@ class App extends Component {
         this.state.instructors[randInstructor].length
       );
       // creates a copy of original state instructors array
-      const instructors = this.state.instructors.slice();
+      // const instructors = this.state.instructors.slice();
+      const instructors = this.state.instructors.map((inst, i) => {
+        if (i === randInstructor) {
+          const hobbies = [...inst.hobbies];
+          hobbies.splice(hobbyIndex, 1);
+          return {
+            ...inst,
+            hobbies
+          }  
+        }
+        return inst;
+
+        // above a refactor of below; doing the same thing
+        // i === randInstructor ? {
+        //   ...inst,
+        //   hobbies: [...inst.hobbies.slice(0, hobbyIndex).concat(inst.hobbies.slice(hobbyIndex + 1, inst.hobbies.length))]
+        // } : inst
+
+      });
+
       // the below code is a no-no.
       // it's not 'creating a copy'; it's actually changing the state of
       // the original hobbies array in state.instructors because
       // it's still referencing the hobbies array, not a copy
       // instructors[randInstructor].hobbies.splice(hobbyIndex,1
-      instructors[randInstructor] = Object.assign({}, instructors[randInstructor]);
+      // instructors[randInstructor] = Object.assign({}, instructors[randInstructor]);
       // above is making a copy of the original object.
       // below a new array is made from the original state array.
-      instructors[randInstructor].hobbies = instructors[randInstructor].hobbies.slice();
-      instructors[randInstructor].hobbies.splice(hobbyIndex, 1);
+      // instructors[randInstructor].hobbies = instructors[randInstructor].hobbies.slice();
+      // instructors[randInstructor].hobbies.splice(hobbyIndex, 1);
       this.setState({instructors});
     }, 5000);
   }
