@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 
 // creating a "template" for instructors
+// will inherit state from App
 class InstructorItem extends Component {
   static propTypes = {
     name: PropTypes.string,
@@ -88,11 +90,17 @@ class App extends Component {
   }
   render() {
     const instructors = this.state.instructors.map((instructor, index) => (
-      <li key={index}>
-        <h3>{instructor.name}</h3>
-        <h4>Hobbies: {instructor.hobbies.join(", ")}</h4>
-      </li>
+      <InstructorItem 
+        key={index}
+        name={instructor.name}
+        hobbies={instructor.hobbies}
+      />
     ));
+    //  <li key={index}>
+    //    <h3>{instructor.name}</h3>
+    //    <h4>Hobbies: {instructor.hobbies.join(", ")}</h4>
+    //  </li>
+    //));
     return (
       <div className="App">
         <ul>
