@@ -106,6 +106,8 @@ class App extends Component {
       instructors[randInstructor].hobbies = instructors[randInstructor].hobbies.slice();
       instructors[randInstructor].hobbies.splice(hobbyIndex, 1);
       */
+      // setState: use update function if dependant on previous state
+      // use a callback to check updates cuz on setState is asynchronous
       this.setState({instructors});
     }, 5000);
   }
