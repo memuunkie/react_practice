@@ -5,8 +5,8 @@ import './App.css';
 const NUM_BOXES = 32;
 const Box = ({ color }) => {
   const style = {
-    width: '180px',
-    height: '180px',
+    width: '150px',
+    height: '150px',
     display: 'inline-block',
     backgroundColor: color
   }
@@ -25,10 +25,11 @@ class App extends Component {
     setInterval(() => {
       // makes a copy of boxes array
       const boxes = this.state.boxes.slice();
-      const randIndex = Math.floor(Math.random * boxes.length);
-      
-
-    }, 300)
+      const randIndex = Math.floor(Math.random() * boxes.length);
+      boxes[randIndex] = this.getRandomColor();
+      // setState with new boxes array
+      this.setState({ boxes });
+    }, 300);
   }
 
   // chooses a random color
