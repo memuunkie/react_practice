@@ -21,6 +21,9 @@ header h2 {
  color: #bdc3c7;
  font-weight:300;
 }
+div {
+  padding-left: 50px;
+}
 /*****************************FORM STYLES*****************************/
 .form {
  width: 800px;
