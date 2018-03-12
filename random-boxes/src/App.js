@@ -1,17 +1,49 @@
 import React, { Component } from 'react';
 import './App.css';
 
+// number of boxes that will be rendered; will not change
+const NUM_BOXES = 32;
+const Box = ({ color }) => {
+  const style = {
+    width: '180px',
+    height: '180px',
+    display: 'inline-block',
+    backgroundColor: color
+  }
+
+  return <div style={ style } />;
+};
+
 class App extends Component {
   
   constructor(props) {
     super(props);
+    const boxes = Array(NUM_BOXES).fill().map(this.getRandomColor, this);
+    this.state = { boxes };
+
+    // arrow function will use 'this.''
+    setInterval(() => {
+      // makes a copy of boxes array
+      const boxes = this.state.boxes.slice();
+      const randIndex = Math.floor(Math.random * boxes.length);
+      
+
+    }, 300)
+  }
+
+  // chooses a random color
+  getRandomColor() {
+    let colorIndex = Math.floor(Math.random() * this.props.allColors.length);
+    return this.props.allColors[colorIndex];
   }
   
   render() {
-
+    const boxes = this.state.boxes.map((color, index) => (
+      <Box key={ index } color={ color } />
+    ));
     return (
       <div className="App">
-        Render boxes here
+        { boxes }
       </div>
     );
   }
