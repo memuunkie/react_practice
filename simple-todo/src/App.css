@@ -4,6 +4,13 @@ body {
  font-family: 'Montserrat', sans-serif;
  background: #ecf0f1;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /*****************************HEADER STYLES*****************************/
 header {
  text-align: center;
@@ -20,9 +27,6 @@ header h1 span {
 header h2 {
  color: #bdc3c7;
  font-weight:300;
-}
-div {
-  padding-left: 50px;
 }
 /*****************************FORM STYLES*****************************/
 .form {
