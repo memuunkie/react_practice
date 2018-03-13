@@ -45,6 +45,7 @@ class RecipeApp extends Component {
   			return {
   				nextRecipeId: prevState.nextRecipeId + 1,
   				recipes: [...this.state.recipes, newRecipe],
+  				showForm: false,
   			}
   		});
   	}
