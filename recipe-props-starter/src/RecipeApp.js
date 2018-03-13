@@ -53,7 +53,7 @@ class RecipeApp extends Component {
   		const {showForm} = this.state;
     	return (
 		    <div className="App">
-			    <NavBar />
+			    <NavBar onNewRecipe={ () => this.setState({showForm: true})}/>
 			    { showForm ? <RecipeInput onSave={ this.handleSave } /> : null }
 			    <RecipeList recipes={ this.state.recipes }/>
 		    </div>
