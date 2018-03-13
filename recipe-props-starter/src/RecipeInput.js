@@ -80,52 +80,52 @@ class RecipeInput extends Component {
 							autoComplete='off'
 							onChange={ this.handleChange }
 						/>
-						<label 
-							htmlFor='recipe-instructions-input'
-							style={{ marginTop: '5px'}}
-						>
-						Instructions
-						</label>
-						<textarea 
-							key='ingredients'
-							id='recipe-instructions-input'
-							type='instructions'
-							name='instructions'
-							rows='8'
-							cols='50'
+					</div>
+					<label 
+						htmlFor='recipe-instructions-input'
+						style={{ marginTop: '5px'}}
+					>
+					Instructions
+					</label>
+					<textarea 
+						key='ingredients'
+						id='recipe-instructions-input'
+						type='instructions'
+						name='instructions'
+						rows='8'
+						cols='50'
+						autoComplete='off'
+						value={ instructions }
+						onChange={ this.handleChange }
+					/>
+					{ inputs }
+					<button
+						type='button'
+						onClick={ this.handleNewIngredient }
+						className='buttons'
+					>
+					+	
+					</button>
+					<div className='recipe-form-line'>
+						<label htmlFor='recipe-img-input'>Image Url</label>
+						<input 
+							id='recipe-img-input'
+							type='text'
+							placeholder=''
+							name='img'
+							value={ img }
+							size={ 36 }
 							autoComplete='off'
-							value={ instructions }
 							onChange={ this.handleChange }
 						/>
-						{ inputs }
-						<button
-							type='button'
-							onClick={ this.handleNewIngredient }
-							className='buttons'
-						>
-						+	
-						</button>
-						<div className='recipe-form-line'>
-							<label htmlFor='recipe-img-input'>Image Url</label>
-							<input 
-								id='recipe-img-input'
-								type='text'
-								placeholder=''
-								name='img'
-								value={ img }
-								size={ 36 }
-								autoComplete='off'
-								onChange={ this.handleChange }
-							/>
-						</div>
-						<button
-							type='submit'
-							className='buttons'
-							style={{ alignSelf: 'flex-end', marginRight:0 }}
-						>
-						SAVE	
-						</button>
 					</div>
+					<button
+						type='submit'
+						className='buttons'
+						style={{ alignSelf: 'flex-end', marginRight:0 }}
+					>
+					SAVE	
+					</button>
 				</form>
 			</div>
 		);
