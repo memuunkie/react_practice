@@ -41,6 +41,7 @@ class RecipeApp extends Component {
   	}
 
   	handleSave(recipe) {
+  		// handles the Save button; rehides form
   		this.setState((prevState, props) => {
   			const newRecipe = {...recipe, id: this.state.nextRecipeId};
   			return {
@@ -52,6 +53,7 @@ class RecipeApp extends Component {
   	}
 
   	onDelete(id) {
+  		// handles the Delete button
   		const recipes = this.state.recipes.filter(rec => rec.id !== id);
   		this.setState({recipes});
   	}

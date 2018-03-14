@@ -24,23 +24,28 @@ class RecipeInput extends Component {
 
 	// set this up so it can be used by more than one input
 	handleChange(evt) {
+		// listens to the form inputs
 		this.setState({[evt.target.name]: evt.target.value});
 	}
 
 	handleNewIngredient(evt) {
+		// listens to add new ingredient button
 		const {ingredients} = this.state;
 		this.setState({ingredients: [...ingredients, '']});
 	}
 
 	handleChangeIng(evt) {
+		// Preps and holds ingredient list before save
 		const index = Number(evt.target.name.split('-')[1]);
-		const ingredients = this.state.ingredients.map((ing, index) => (
-			index === index ? evt.target.value : ing
+		const ingredients = this.state.ingredients.map((ing, i) => (
+			// goddammit, orginally set to index === index let a doof
+			i === index ? evt.target.value : ing
 		));
 		this.setState({ingredients});
 	}
 
 	handleSubmit(evt) {
+		// takes the inputs from the form to turn into new recipe card, resets the form
 		evt.preventDefault();
 		this.props.onSave({...this.state});
 		this.setState({
@@ -104,7 +109,7 @@ class RecipeInput extends Component {
 					<textarea 
 						key='ingredients'
 						id='recipe-instructions-input'
-						type='instructions'
+						type='Instructions'
 						name='instructions'
 						rows='8'
 						cols='50'
