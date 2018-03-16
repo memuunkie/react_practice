@@ -40,6 +40,7 @@ class RecipeApp extends Component {
 	  	this.onDelete = this.onDelete.bind(this);
   	}
 
+  	// callback for RecipeInput
   	handleSave(recipe) {
   		// handles the Save button; rehides form
   		this.setState((prevState, props) => {
