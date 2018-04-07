@@ -42,6 +42,7 @@ export default class MemoryGame extends Component {
   }
 
   handleNewGame() {
+    // reset cardState back to HIDING and reshuffle cards
     let cards = this.state.cards.map(c => ({
       ...c,
       cardState: CardState.HIDING,
@@ -51,6 +52,7 @@ export default class MemoryGame extends Component {
   }
 
   handleClick(id) {
+    // for updating the props of cards
     const mapCardState = (cards, idsToChange, newCardState) => {
       return cards.map(c => {
         if (idsToChange.includes(c.id)) {
@@ -77,6 +79,7 @@ export default class MemoryGame extends Component {
 
     const ids = showingCards.map(c => c.id);
 
+    // check for if cards match or not
     if (showingCards.length === 2 &&
         showingCards[0].backgroundColor === showingCards[1].backgroundColor) {
       cards = mapCardState(cards, ids, CardState.MATCHING);
@@ -86,7 +89,8 @@ export default class MemoryGame extends Component {
       noClick = true;
 
       this.setState({cards, noClick}, () => {
-        // setting the state to HIDING after 1.5 seconds
+        // keep from additional clicking & 
+        // set state to HIDING for unmatched cards after 1.5 seconds
         setTimeout(() => {
           this.setState({
             cards: hidingCards, 
