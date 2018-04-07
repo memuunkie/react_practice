@@ -19,8 +19,8 @@ export default class MemoryGame extends Component {
     let cards = [
       {id: 0, cardState: CardState.HIDING, backgroundColor: 'red'},
       {id: 1, cardState: CardState.HIDING, backgroundColor: 'red'},
-      {id: 2, cardState: CardState.HIDING, backgroundColor: 'navy'},
-      {id: 3, cardState: CardState.HIDING, backgroundColor: 'navy'},
+      {id: 2, cardState: CardState.HIDING, backgroundColor: 'white'},
+      {id: 3, cardState: CardState.HIDING, backgroundColor: 'white'},
       {id: 4, cardState: CardState.HIDING, backgroundColor: 'green'},
       {id: 5, cardState: CardState.HIDING, backgroundColor: 'green'},
       {id: 6, cardState: CardState.HIDING, backgroundColor: 'yellow'},
@@ -42,24 +42,62 @@ export default class MemoryGame extends Component {
   }
 
   handleNewGame() {
-    let cards = this.state.cards.map(c => ( {
+    let cards = this.state.cards.map(c => ({
       ...c,
-      cardState: CardState.HIDING
+      cardState: CardState.HIDING,
     }));
     cards = shuffle(cards);
     this.setState({cards});
   }
 
   handleClick(id) {
-    this.setState(prevState => {
-      let cards = prevState.cards.map( c => (
-          c.id === id ? {
+    const mapCardState = (cards, idsToChange, newCardState) => {
+      return cards.map(c => {
+        if (idsToChange.includes(c.id)) {
+          return {
             ...c,
-            cardState: c.cardState === CardState.HIDING ? CardState.MATCHING : CardState.HIDING
-          } : c
-      ));
-      return {cards};
-    });
+            cardState: newCardState
+          };
+        }
+        return c;
+      });
+    }
+
+    const foundCard = this.state.cards.find(c => c.id === id);
+
+    if (this.state.noClick || foundCard.cardState !== CardState.HIDING) {
+      return;
+    }
+
+    let noClick = false;
+
+    let cards = mapCardState(this.state.cards, [id], CardState.SHOWING);
+
+    const showingCards = cards.filter((c) => c.cardState === CardState.SHOWING);
+
+    const ids = showingCards.map(c => c.id);
+
+    if (showingCards.length === 2 &&
+        showingCards[0].backgroundColor === showingCards[1].backgroundColor) {
+      cards = mapCardState(cards, ids, CardState.MATCHING);
+    } else if (showingCards.length === 2) {
+      let hidingCards = mapCardState(cards, ids, CardState.HIDING);
+      
+      noClick = true;
+
+      this.setState({cards, noClick}, () => {
+        // setting the state to HIDING after 1.5 seconds
+        setTimeout(() => {
+          this.setState({
+            cards: hidingCards, 
+            noClick: false
+          });
+        }, 1500);
+      });
+      return;
+    }
+
+    this.setState({cards, noClick});
   }
 
   render() {
